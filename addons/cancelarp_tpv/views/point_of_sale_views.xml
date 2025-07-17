@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <record id="restrict_cancel_assets" model="ir.asset">
+            <field name="name">Restrict TPV Cancel</field>
+            <field name="bundle">point_of_sale.assets</field>
+            <field name="path">/cancelarp_tpv/static/src/js/restrict_cancel.js</field>
+            <field name="active">True</field>
+            <field name="target">web</field>
+        </record>
+    </data>
+</odoo>

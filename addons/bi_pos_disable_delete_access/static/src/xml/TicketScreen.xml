@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_template" inherit_id="point_of_sale.template" xml:space="preserve">
+
+	<t t-name="TicketScreen" t-inherit="point_of_sale.TicketScreen" t-inherit-mode="extension" owl="1">
+		<xpath expr="//div[@t-if='!shouldHideDeleteButton(order)']" position="replace">
+			<t t-log="env.services.pos.user.disable_delete_access"/>
+			<t t-if="env and env.services.pos and env.services.pos.user and env.services.pos.user.disable_delete_access">
+				<div t-if="!shouldHideDeleteButton(order)" class="col very-narrow delete-button p-2" style="display:none;" name="delete" t-on-click.stop="() => this.onDeleteOrder(order)">
+					<i class="fa fa-trash" aria-hidden="true"/><t t-if="env.isMobile"> Delete</t>
+				</div>
+		    </t>
+			<t t-if="env and env.services.pos and env.services.pos.user and !env.services.pos.user.disable_delete_access">
+				<div t-if="!shouldHideDeleteButton(order)" class="col very-narrow delete-button p-2" name="delete" t-on-click.stop="() => this.onDeleteOrder(order)">
+					<i class="fa fa-trash" aria-hidden="true"/><t t-if="env.isMobile"> Delete</t>
+				</div>
+		    </t>
+		</xpath>
+	</t>
+</templates>

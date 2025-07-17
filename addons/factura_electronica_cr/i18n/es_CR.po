@@ -1,0 +1,2487 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* factura_electronica_cr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20220204\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-13 01:34+0000\n"
+"PO-Revision-Date: 2022-04-13 01:34+0000\n"
+"Last-Translator: Norlan Ruiz<ruiznorlan@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: factura_electronica_cr
+#: model:mail.template,body_html:factura_electronica_cr.email_template_client_exoneration_expired
+msgid ""
+"\n"
+"        \n"
+"            <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"                <p>Dear ${object.name},</p>\n"
+"                <p>\n"
+"                We realized that your VAT exoneration number ${object.exoneration_number} is expired. Please update this information as soon as possible or we'll have to create new invoices including this tax.\n"
+"                </p>\n"
+"                <br/>\n"
+"                <p>\n"
+"                Thanks for all your help.\n"
+"                </p>\n"
+"                <br/>\n"
+"                Best Regards,\n"
+"                <br/>\n"
+"                <br/>\n"
+"                ${user.name}\n"
+"                <br/>\n"
+"                <br/>\n"
+"                <br/>\n"
+"            </div>\n"
+"        \n"
+"        "
+msgstr ""
+"\n"
+"        \n"
+"            <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"                <p>Estimado ${object.name},</p>\n"
+"                <p>\n"
+"                Nos dimos cuenta de que su número de exoneración de IVA ${object.exoneration_number} está expirado. Actualice esta información lo antes posible o tendremos que crear nuevas facturas que incluyan este impuesto.\n"
+"                </p>\n"
+"                <br/>\n"
+"                <p>\n"
+"                Gracias por toda su ayuda.\n"
+"                </p>\n"
+"                <br/>\n"
+"                Saludos,\n"
+"                <br/>\n"
+"                <br/>\n"
+"                ${user.name}\n"
+"                <br/>\n"
+"                <br/>\n"
+"                <br/>\n"
+"            </div>\n"
+"        \n"
+"        "
+
+#. module: factura_electronica_cr
+#: model:mail.template,subject:factura_electronica_cr.email_template_invoice_vendor
+msgid "${object.company_id.name} Invoice (Ref ${object.number or 'n/a'})"
+msgstr "${object.company_id.name} Documento (Ref ${object.number or 'n/a'})"
+
+#. module: factura_electronica_cr
+#: model:mail.template,subject:factura_electronica_cr.email_template_client_exoneration_expired
+msgid "${user.company_id.commercial_name}: VAT exoneration expired"
+msgstr "${user.company_id.commercial_name}: Exoneración de IVA vencida"
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_Servicio
+msgid "10% Servicio"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "<b>Previous consecutive:</b>"
+msgstr "<b>Consecutivo anterior:</b>"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "<b>Previous state: </b>"
+msgstr "<b>Estado anterior: </b>"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "<br /><b>Consecutivo de mensaje: </b>"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "<br /><b>Documento: </b>"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "<br/><b>Mensaje indicado:</b>"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:mail.template,body_html:factura_electronica_cr.email_template_edi_expiration_notice
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"\n"
+"                <h1>NOTIFICACIÓN IMPORTANTE!!</h1>\n"
+"\n"
+"                <p>\n"
+"                    ${object.company_id.get_message_to_send()}\n"
+"                </p>\n"
+"\n"
+"            </div>\n"
+"        "
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:mail.template,body_html:factura_electronica_cr.email_template_invoice_vendor
+msgid ""
+"<div>\n"
+"                <p>\n"
+"                    Dear ${object.partner_id.name}\n"
+"                    % set access_action = object.with_context(force_website=True).get_access_action()\n"
+"                    % set is_online = access_action and access_action['type'] == 'ir.actions.act_url'\n"
+"                    % set access_url = object.get_mail_url()\n"
+"\n"
+"                    % if object.partner_id.parent_id:\n"
+"                    (<i>${object.partner_id.parent_id.name}</i>)\n"
+"                    % endif\n"
+"                    ,\n"
+"                </p>\n"
+"                <p>\n"
+"                    ${object.company_id.name} has accepted in \"Ministerio de Hacienda\" your\n"
+"                    % if object.number:\n"
+"                    invoice <strong>${object.number}</strong>\n"
+"                    % else:\n"
+"                    invoice\n"
+"                    % endif\n"
+"                    % if object.origin:\n"
+"                    (with reference: ${object.origin})\n"
+"                    % endif\n"
+"                    amounting in <strong>${format_amount(object.amount_total, object.currency_id)}</strong>\n"
+"                    from ${object.company_id.name}.\n"
+"                </p>\n"
+"\n"
+"                <br/>\n"
+"                <strong>Electronic number: </strong> ${object.number_electronic}\n"
+"                <br/>\n"
+"                <strong>Confirmation date: </strong> ${object.date_issuance}\n"
+"                <br/>\n"
+"                <strong>Confirmation Message: </strong> ${object.state_invoice_partner}\n"
+"                <br/>\n"
+"                <strong>\"Hacienda\" status: </strong> ${object.state_tributacion}\n"
+"\n"
+"                <br/><br/>\n"
+"                <strong>Issuing company </strong>\n"
+"                <br/>\n"
+"                <strong>Name: </strong>${object.partner_id.name}\n"
+"                <br/>\n"
+"                <strong>Id: </strong>${object.partner_id.vat}\n"
+"\n"
+"                <br/><br/>\n"
+"                <strong>Receiving company </strong>\n"
+"                <br/>\n"
+"                <strong>Name: </strong>${object.company_id.name}\n"
+"                <br/>\n"
+"                <strong>Id: </strong>${object.company_id.vat}\n"
+"                <br/><br/>\n"
+"                Attached you'll find the XMLs with the message sent to \"Hacienda\" and its response for your backup\n"
+"                <br/><br/>\n"
+"                <p>Thank you,</p>\n"
+"                <p style=\"color:#888888\">\n"
+"                    % if object.user_id and object.user_id.signature:\n"
+"                    ${object.user_id.signature | safe}\n"
+"                    % endif\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div>\n"
+"    <p>\n"
+"        Estimado ${object.partner_id.name}\n"
+"        % set access_action = object.with_context(force_website=True).get_access_action()\n"
+"        % set is_online = access_action and access_action['type'] == 'ir.actions.act_url'\n"
+"        % set access_url = object.get_mail_url()\n"
+"\n"
+"        % if object.partner_id.parent_id:\n"
+"        (<i>${object.partner_id.parent_id.name}</i>)\n"
+"        % endif\n"
+"        ,\n"
+"    </p>\n"
+"    <p>\n"
+"        ${object.company_id.name} ha sido aceptado en el \"Ministerio de Hacienda\" su\n"
+"        % if object.number:\n"
+"        documento <strong>${object.number}</strong>\n"
+"        % else:\n"
+"        documento\n"
+"        % endif\n"
+"        % if object.origin:\n"
+"        (con referencia: ${object.origin})\n"
+"        % endif\n"
+"        por un monto de <strong>${format_amount(object.amount_total, object.currency_id)}</strong>\n"
+"        de ${object.company_id.name}.\n"
+"    </p>\n"
+"\n"
+"    <br/>\n"
+"    <strong>Número Electrónico: </strong> ${object.number_electronic}\n"
+"    <br/>\n"
+"    <strong>Fecha de Confirmación: </strong> ${object.date_issuance}\n"
+"    <br/>\n"
+"    <strong>Mensaje de Confirmación: </strong> ${object.state_invoice_partner}\n"
+"    <br/>\n"
+"    <strong>Estado ante \"Hacienda\": </strong> ${object.state_tributacion}\n"
+"\n"
+"    <br/><br/>\n"
+"    <strong>Emisor</strong>\n"
+"    <br/>\n"
+"    <strong>Nombre: </strong>${object.partner_id.name}\n"
+"    <br/>\n"
+"    <strong>Identificación: </strong>${object.partner_id.vat}\n"
+"\n"
+"    <br/><br/>\n"
+"    <strong>Receptor </strong>\n"
+"    <br/>\n"
+"    <strong>Nombre: </strong>${object.company_id.name}\n"
+"    <br/>\n"
+"    <strong>Identificación: </strong>${object.company_id.vat}\n"
+"    <br/><br/>\n"
+"    Adjunto encontrará los XMLs con el mensaje enviado a \"Hacienda\" y la respuesta para su respaldo\n"
+"    <br/><br/>\n"
+"    <p>Gracias,</p>\n"
+"    <p style=\"color:#888888\">\n"
+"        % if object.user_id and object.user_id.signature:\n"
+"        ${object.user_id.signature | safe}\n"
+"        % endif\n"
+"    </p>\n"
+"</div>\n"
+"            "
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "<p><b>Enviando Mensaje Receptor</b></p>"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "<p><b>Ha enviado Mensaje de Receptor</b>"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid ""
+"Ability to select a package type in sales orders and to force a quantity "
+"that is a multiple of the number of units per package."
+msgstr ""
+"Posibilidad de seleccionar un tipo de paquete en las órdenes de venta y "
+"forzar una cantidad que sea un múltiplo del número de unidades por paquete."
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_account_invoice_send
+msgid "Account Invoice Send"
+msgstr "Enviar Factura"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_account_move_reversal
+msgid "Account Move Reversal"
+msgstr "Revocación de movimiento en cuenta"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_invoice_partner__2
+msgid "Aceptacion parcial"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_invoice_partner__1
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_send_invoice__aceptado
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_tributacion__aceptado
+msgid "Aceptado"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_needaction
+msgid "Action Needed"
+msgstr "Acción Necesaria"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_aut_ex__active
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__active
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods__active
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_code__active
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_document__active
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_resolution__active
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__active
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_economic_activity_filter
+msgid "Active"
+msgstr "Activo"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_company.py:0
+#, python-format
+msgid "Actividades Económicas"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_economic_activity_filter
+msgid "Activity"
+msgstr "Actividad"
+
+#. module: factura_electronica_cr
+#: model:uom.uom,name:factura_electronica_cr.product_uom_alc
+msgid "Alquiler de Uso Comercial"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:uom.uom,name:factura_electronica_cr.product_uom_al
+msgid "Alquiler de Uso Habitacional"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__invoice_amount_text
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__invoice_amount_text
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__invoice_amount_text
+msgid "Amount in Letters"
+msgstr "Monto en letras"
+
+#. module: factura_electronica_cr
+#: model:uom.category,name:factura_electronica_cr.product_uom_categ_area
+msgid "Area"
+msgstr "Área"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_attachment_count
+msgid "Attachment Count"
+msgstr "Recuento de archivos adjuntos"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid "Attributes"
+msgstr "Atributos"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__type_exoneration
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__type_exoneration
+msgid "Authorization Type"
+msgstr "Tipo de Autorización"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_company.py:0
+#, python-format
+msgid ""
+"Aviso!.\n"
+" Cargando actividades económicas desde Hacienda"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid ""
+"Aviso!.\n"
+" Error en carga del XML del proveedor"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_category__cabys_code
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_product__cabys_code
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_template__cabys_code
+msgid "CAByS Code"
+msgstr "Código CAByS"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_product_category__cabys_code
+#: model:ir.model.fields,help:factura_electronica_cr.field_product_product__cabys_code
+#: model:ir.model.fields,help:factura_electronica_cr.field_product_template__cabys_code
+msgid "CAByS code from Ministerio de Hacienda"
+msgstr "Código CAByS de Ministerio de Hacienda"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid "Cargar datos del XML"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:product.template,name:factura_electronica_cr.product_tercero
+msgid "Cobro de un tercero"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_aut_ex__code
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_code_type_product__code
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__code
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_identification_type__code
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_code__code
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_document__code
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__code
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_uom_uom__code
+msgid "Code"
+msgstr "Código"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_product__code_type_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_template__code_type_id
+msgid "Code Type"
+msgstr "Tipo de Código"
+
+#. module: factura_electronica_cr
+#: model:ir.actions.act_window,name:factura_electronica_cr.action_code_type_product
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_code_type_product_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_code_type_product_tree
+msgid "Code types"
+msgstr "Tipos de Códigos"
+
+#. module: factura_electronica_cr
+#: model:ir.ui.menu,name:factura_electronica_cr.menu_code_type_product
+msgid "Code types (Products)"
+msgstr "Tipos de Códigos (Productos)"
+
+#. module: factura_electronica_cr
+#: model:uom.uom,name:factura_electronica_cr.product_uom_com
+msgid "Comisiones"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__commercial_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__commercial_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__commercial_name
+msgid "Commercial Name"
+msgstr "Nombre Comercial"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_product__commercial_measurement
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_template__commercial_measurement
+msgid "Commercial Unit"
+msgstr "Unidad Comercial"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_invoice_qr_fields__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__company_vat
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__company_vat
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__company_vat
+msgid "Company Tax ID"
+msgstr "Identificación de la compañía"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_company.py:0
+#: code:addons/factura_electronica_cr/models/res_partner.py:0
+#, python-format
+msgid "Company VAT is invalid"
+msgstr "El IVA de la compañía no es válido"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de configuración"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__sequence
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__sequence
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_tree_inherit
+msgid "Consecutive"
+msgstr "Consecutivo"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__consecutive_number_receiver
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__consecutive_number_receiver
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__consecutive_number_receiver
+msgid "Consecutive Receiver Number"
+msgstr "Número consecutivo del Receptor"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "Consecutive Switching of Receiver Message</b><br/>"
+msgstr "Cambiando Consecutivo del Mensaje Receptor"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid "Consult Document"
+msgstr "Consultar Documento"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_company_form_inherit
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_res_partner_inherit
+msgid "Consultar Actividad Economica en Hacienda"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: factura_electronica_cr
+#: model:product.template,name:factura_electronica_cr.product_parafiscal
+msgid "Contribución parafiscal"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:product.template,name:factura_electronica_cr.product_exportacion
+msgid "Costos de Exportación"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid "Create Provider"
+msgstr "Crear Proveedor"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_aut_ex__create_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_code_type_product__create_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__create_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_identification_type__create_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_invoice_qr_fields__create_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods__create_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_code__create_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_document__create_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_resolution__create_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_aut_ex__create_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_code_type_product__create_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__create_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_identification_type__create_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_invoice_qr_fields__create_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods__create_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_code__create_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_document__create_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_resolution__create_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__signature
+msgid "Cryptographic Key"
+msgstr "Llave criptográfica"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "Customer"
+msgstr "Socio de Negocio"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_account_move_reversal_form_inherit
+msgid "Código Referencia"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_resolution__date_resolution
+msgid "DGT expiration resolution date."
+msgstr "Fecha de resolución de vencimiento de la DGT."
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_resolution__name
+msgid "DGT resolution name."
+msgstr "Nombre resolución DGT"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_resolution__date_resolution
+msgid "Date Resolution"
+msgstr "Resolución de fecha"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__date_issuance
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__date_issuance
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__date_issuance
+msgid "Date of issue"
+msgstr "Fecha de emisión"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_company.py:0
+#, python-format
+msgid "Datos Incorrectos"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__range_days
+msgid "Days range"
+msgstr "Rango de días"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__expense_analytic_account_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_config_settings__expense_analytic_account_id
+msgid "Default Analytic Account for expenses when loading data from XML"
+msgstr "Cuenta analítica predeterminada para gastos al cargar datos desde XML"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__activity_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__activity_id
+msgid "Default Economic Activity"
+msgstr "Actividad económica por defecto"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__expense_account_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_config_settings__expense_account_id
+msgid "Default Expense Account when loading data from XML"
+msgstr "Cuenta de gastos predeterminada al cargar datos desde XML"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_account_journal_inherit_form
+msgid "Default account for expenses when importing electronic invoice"
+msgstr "Cuenta predeterminada para gastos al importar factura electrónica"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid "Default account used for expenses when importing electronic invoice"
+msgstr ""
+"Cuenta predeterminada utilizada para gastos al importar factura electrónica"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_account_journal_inherit_form
+msgid ""
+"Default analytic account for expenses when importing electronic invoice"
+msgstr ""
+"Cuenta analítica predeterminada para gastos al importar factura electrónica"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid ""
+"Default analytic account used for expenses when importing electronic invoice"
+msgstr ""
+"Cuenta analítica predeterminada utilizada para gastos al importar factura "
+"electrónica"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__activity_id
+msgid "Default economic activity"
+msgstr "Actividad económica por defecto"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_account_journal_inherit_form
+msgid "Default product for expenses when importing electronic invoice"
+msgstr "Producto por defecto para gastos al importar factura electrónica"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__expense_product_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_config_settings__expense_product_id
+msgid "Default product for expenses when loading data from XML"
+msgstr "Producto por defecto para gastos al cargar datos desde XML"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid "Default product used for expenses when importing electronic invoice"
+msgstr ""
+"Producto predeterminado utilizado para gastos al importar factura "
+"electrónica"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__description
+msgid "Description"
+msgstr "Descripción"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__res_company__frm_ws_ambiente__disabled
+msgid "Deshabilitado"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line__discount_note
+msgid "Discount Note"
+msgstr "Nota de descuento"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_invoice_send__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_reversal__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment_term__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_tax__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_aut_ex__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_code_type_product__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_identification_type__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_invoice_qr_fields__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_mail_compose_message__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_category__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_template__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_code__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_document__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_resolution__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__display_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_uom_uom__display_name
+msgid "Display Name"
+msgstr "Mostrar nombre"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_tree_inherit
+msgid "Doc Elect."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_account_move_reversal_form_inherit
+msgid "Documento Referencia"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__date_expiration_sign
+msgid "Due date"
+msgstr "Fecha de Vencimiento"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "E-INV CR - Send Acceptance Message - HALTED - Failed to get token"
+msgstr "E-INV CR - Enviar mensaje de aceptación - DETENIDO - No se pudo obtener el token"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "E-INV CR - send_mrs_to_hacienda - 013"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_company_form_inherit
+msgid "EXONET"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__economic_activities_ids
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__economic_activities_ids
+msgid "Economic Activities"
+msgstr "Actividades Económicas"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__economic_activity_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__economic_activity_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__economic_activity_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_category__economic_activity_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_product__economic_activity_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_template__economic_activity_id
+msgid "Economic Activity"
+msgstr "Actividad Económica"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__economic_activities_ids
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__economic_activities_ids
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__economic_activities_ids
+msgid "Economic activities"
+msgstr "Actividades Económicas"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_economic_activity
+msgid "Economic activities listed by Ministerio de Hacienda"
+msgstr "Actividades económicas catalogadas por el Ministerio de Hacienda"
+
+#. module: factura_electronica_cr
+#: model:ir.actions.act_window,name:factura_electronica_cr.action_economic_activity
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line__economic_activity_id
+#: model:ir.ui.menu,name:factura_electronica_cr.menu_economic_activity
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_economic_activity_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_economic_activity_tree
+msgid "Economic activity"
+msgstr "Actividad Económica"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_product_category__economic_activity_id
+#: model:ir.model.fields,help:factura_electronica_cr.field_product_product__economic_activity_id
+#: model:ir.model.fields,help:factura_electronica_cr.field_product_template__economic_activity_id
+msgid "Economic activity code from Ministerio de Hacienda"
+msgstr "Código de actividad económica del Ministerio de Hacienda"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/api_facturae.py:0
+#, python-format
+msgid "El ID del mensaje receptor es inválido."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_partner.py:0
+#, python-format
+msgid ""
+"El código de exoneración no concuerda con la cédula del socio de negocio."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_tax.py:0
+#, python-format
+msgid "El porcentaje no puede ser mayor a 13"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid "Electronic Acceptance"
+msgstr "Aceptación Electrónica"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__NC_sequence_id
+msgid "Electronic Credit Notes Sequence"
+msgstr "Secuencia de notas de crédito electrónicas"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__ND_sequence_id
+msgid "Electronic Debit Notes Sequence"
+msgstr "Secuencia de notas de débito electrónicas"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid "Electronic Document Reference"
+msgstr "Referencia de Documento Electrónico"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__tipo_documento__disabled
+msgid "Electronic Documents Disabled"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid "Electronic Information"
+msgstr "Informacion Electronica"
+
+#. module: factura_electronica_cr
+#: model:ir.ui.menu,name:factura_electronica_cr.menu_electronic_invoice
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_account_journal_inherit_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_company_form_inherit
+msgid "Electronic Invoice"
+msgstr "Factura Electrónica"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__FE_sequence_id
+msgid "Electronic Invoice Sequence"
+msgstr "Secuencia de facturas electrónicas"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid "Electronic Receipts"
+msgstr "Comprobantes Electrónicos"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__TE_sequence_id
+msgid "Electronic Ticket Sequence"
+msgstr "Secuencia de tiquetes electrónicos"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__frm_ws_password
+msgid "Electronic invoice password"
+msgstr "Contraseña de factura electrónica"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__frm_ws_identificador
+msgid "Electronic invoice user"
+msgstr "Usuario factura electrónica"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__number_electronic
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__number_electronic
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__number_electronic
+msgid "Electronic number"
+msgstr "Número electrónico"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__to_emails
+msgid "Email"
+msgstr "Correo Electrónico"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Asistente de redacción de correo electrónico"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_email__sent
+msgid "Enviado"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.actions.server,name:factura_electronica_cr.ir_cron_send_expiration_notice_ir_actions_server
+#: model:ir.cron,cron_name:factura_electronica_cr.ir_cron_send_expiration_notice
+#: model:ir.cron,name:factura_electronica_cr.ir_cron_send_expiration_notice
+msgid "Enviar Aviso de Expiración de Llave Criptográfica"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.actions.server,name:factura_electronica_cr.ir_cron_mr_hacienda_invoice_ir_actions_server
+#: model:ir.cron,cron_name:factura_electronica_cr.ir_cron_mr_hacienda_invoice
+#: model:ir.cron,name:factura_electronica_cr.ir_cron_mr_hacienda_invoice
+msgid "Envio Mensaje Receptor"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__frm_ws_ambiente
+msgid "Environment"
+msgstr "Ambiente"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/res_company.py:0
+#: code:addons/factura_electronica_cr/models/res_company.py:0
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_send_invoice__error
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_tributacion__error
+#, python-format
+msgid "Error"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_email__fe_error
+msgid "Error FE"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__frm_ws_ambiente
+msgid ""
+"Es el ambiente en al cual se le está actualizando el certificado. Para el "
+"ambiente de calidad (stag), para el ambiente de producción (prod). "
+"Requerido."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__frm_pin
+msgid "Es el pin correspondiente al certificado. Requerido"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__state_tributacion
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__state_tributacion
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__state_tributacion
+msgid "Estado FE"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__state_send_invoice
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__state_send_invoice
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__state_send_invoice
+msgid "Estado FE Proveedor"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__state_email
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__state_email
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__state_email
+msgid "Estado email"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_Exento
+msgid "Exento"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_res_partner_inherit
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_tax_form_inherit
+msgid "Exoneration"
+msgstr "Exoneración"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__institution_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__institution_name
+msgid "Exoneration Issuer"
+msgstr "Emisor de exoneración"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__exoneration_number
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__exoneration_number
+msgid "Exoneration Number"
+msgstr "Número de exoneración"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__date_expiration
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__date_expiration
+msgid "Expiration Date"
+msgstr "Fecha de expiración"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_product__tariff_head
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_template__tariff_head
+msgid "Export Tax rate"
+msgstr "Tasa de impuesto a la exportación"
+
+#. module: factura_electronica_cr
+#: model:ir.actions.server,name:factura_electronica_cr.ir_cron_vat_exoneration_expired_ir_actions_server
+#: model:ir.cron,cron_name:factura_electronica_cr.ir_cron_vat_exoneration_expired
+#: model:ir.cron,name:factura_electronica_cr.ir_cron_vat_exoneration_expired
+msgid "FECR: Check clients VAT exoneration expiration"
+msgstr "FECR: Consultar vencimiento de exoneración de IVA de clientes"
+
+#. module: factura_electronica_cr
+#: model:ir.actions.server,name:factura_electronica_cr.ir_cron_FECR_Consulta_ir_actions_server
+#: model:ir.cron,cron_name:factura_electronica_cr.ir_cron_FECR_Consulta
+#: model:ir.cron,name:factura_electronica_cr.ir_cron_FECR_Consulta
+msgid "FECR: Consulta Estado de Facturas"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.actions.server,name:factura_electronica_cr.ir_cron_FECR_Envia_ir_actions_server
+#: model:ir.cron,cron_name:factura_electronica_cr.ir_cron_FECR_Envia
+#: model:ir.cron,name:factura_electronica_cr.ir_cron_FECR_Envia
+msgid "FECR: Envía Facturas a Hacienda"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.actions.server,name:factura_electronica_cr.ir_cron_FECR_MR_ir_actions_server
+#: model:ir.cron,cron_name:factura_electronica_cr.ir_cron_FECR_MR
+#: model:ir.cron,name:factura_electronica_cr.ir_cron_FECR_MR
+msgid "FECR: Envía Mensajes de Aceptación de Facturas"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__tipo_documento__fe
+msgid "Factura Electrónica"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__tipo_documento__fec
+msgid "Factura Electrónica de Compra"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__tipo_documento__fee
+msgid "Factura Electrónica de Exportación"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_invoice_qr_fields__field_id
+msgid "Field"
+msgstr "Campo"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__fname_xml_comprobante
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__fname_xml_comprobante
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__fname_xml_comprobante
+msgid "File name XML voucher"
+msgstr "Nombre del Comprobante XML"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_send_invoice__firma_invalida
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_tributacion__firma_invalida
+msgid "Firma Inválida"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (Canales)"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Socios)"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_journal.py:0
+#, python-format
+msgid "Generated Documents"
+msgstr "Documentos generados"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__economic_activity__sale_type__goods
+msgid "Goods"
+msgstr "Bienes"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__electronic_invoice_return_message
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__electronic_invoice_return_message
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__electronic_invoice_return_message
+msgid "Hacienda answer"
+msgstr "Respuesta de Hacienda"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_tax__has_exoneration
+msgid "Has Exoneration"
+msgstr "Posee exoneración"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__has_exoneration
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__has_exoneration
+msgid "Has Exoneration?"
+msgstr "¿Tiene exoneración?"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_invoice_send__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_reversal__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment_term__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_tax__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_aut_ex__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_code_type_product__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_identification_type__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_invoice_qr_fields__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_mail_compose_message__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_category__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_template__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_code__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_document__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_config_settings__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_resolution__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_uom_uom__id
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_economic_activity_filter
+msgid "ID"
+msgstr "Identificación"
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IEBA
+msgid "IEBA"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IEBE
+msgid "IEBE"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IPT
+msgid "IPT"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IRBU
+msgid "IRBU"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IUC
+msgid "IUC"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IVA0
+msgid "IVA 0%"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IVA1
+msgid "IVA 1%"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IVA13
+msgid "IVA 13%"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IVA2
+msgid "IVA 2%"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IVA4
+msgid "IVA 4%"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IVA8
+msgid "IVA 8%"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__amount_total_iva_devuelto
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__amount_total_iva_devuelto
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__amount_total_iva_devuelto
+#: model:product.template,name:factura_electronica_cr.product_iva_devuelto
+msgid "IVA Devuelto"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_IVA_ND
+msgid "IVA No deducible"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__identification_id
+msgid "Id Type"
+msgstr "Tipo de Identificación"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__identification_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__identification_id
+msgid "Identification"
+msgstr "Identificación"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_identification_type__name
+msgid "Identification code name."
+msgstr "Nombre del código de identificación."
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_identification_type__notes
+msgid "Identification notes."
+msgstr "Notas de identificación."
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_identification_type__code
+msgid "Identification related code."
+msgstr "Código relacionado con la identificación."
+
+#. module: factura_electronica_cr
+#: model:ir.actions.act_window,name:factura_electronica_cr.action_identification_type
+#: model:ir.ui.menu,name:factura_electronica_cr.menu_identification_type
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_identification_type_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_identification_type_tree
+msgid "Identification type"
+msgstr "Tipo de Identificación"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__message_needaction
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcada, los mensajes nuevos requieren su atención."
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__message_has_error
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__ignore_total_difference
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__ignore_total_difference
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__ignore_total_difference
+msgid "Ignore Difference in Totals"
+msgstr "Ignorar la diferencia en los totales"
+
+#. module: factura_electronica_cr
+#: model:product.template,name:factura_electronica_cr.product_servicio
+msgid "Impuesto de Servicio 10%"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_economic_activity_filter
+msgid "Inactive"
+msgstr "Inactivo"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__load_lines
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_config_settings__load_lines
+msgid ""
+"Indicates if invoice lines should be load when loading a Costa Rican Digital"
+" Invoice"
+msgstr ""
+"Indica si se deben cargar líneas de factura al cargar una Factura Digital "
+"Costarricense"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line__non_tax_deductible
+msgid "Indicates if this invoice is non-tax deductible"
+msgstr "Indica si esta factura no es deducible de impuestos"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_product_product__non_tax_deductible
+#: model:ir.model.fields,help:factura_electronica_cr.field_product_template__non_tax_deductible
+msgid "Indicates if this product is non-tax deductible"
+msgstr "Indica si este producto no es deducible de impuestos"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_tax__non_tax_deductible
+msgid "Indicates if this tax is no deductible for Rent and VAT"
+msgstr "Indica si este impuesto no es deducible por Renta e IVA "
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_bank_statement_line__tipo_documento
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_move__tipo_documento
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_payment__tipo_documento
+msgid ""
+"Indicates the type of document according to the classification of the "
+"Ministerio de Hacienda"
+msgstr ""
+"Indica el tipo de documento según la clasificación del Ministerio de "
+"Hacienda"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_company.py:0
+#, python-format
+msgid "Info"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:uom.uom,name:factura_electronica_cr.product_uom_i
+msgid "Intereses"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line__product_code
+msgid "Internal Reference"
+msgstr "Referencia Interna"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_account_invoice_filter
+msgid "Invoice"
+msgstr "Documento"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__invoice_field_ids
+msgid "Invoice Field's"
+msgstr "Campos de Documento"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__invoice_qr_type
+msgid "Invoice Qr Type"
+msgstr "Tipo de Documento QR"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__res_company__invoice_qr_type__by_info
+msgid "Invoice Text Information"
+msgstr "Información de texto de la factura"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__res_company__invoice_qr_type__by_url
+msgid "Invoice Url"
+msgstr "URL del Documento"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "Invoice XML has not been generated for id:"
+msgstr "No se ha generado XML del documento para el id:"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_is_follower
+msgid "Is Follower"
+msgstr "Es seguidor"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_product__non_tax_deductible
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_template__non_tax_deductible
+msgid "Is Non Tax Deductible"
+msgstr "No es deducible de impuestos"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__date_issue
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__date_issue
+msgid "Issue Date"
+msgstr "Fecha de Emisión"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__export
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__export
+msgid "It's export"
+msgstr "Es exportador"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunte contable"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/api_facturae.py:0
+#, python-format
+msgid "La Cédula Física del emisor debe de tener 9 dígitos"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/api_facturae.py:0
+#, python-format
+msgid "La Cédula Jurídica del emisor debe de tener 10 dígitos"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.constraint,message:factura_electronica_cr.constraint_account_move_number_electronic_uniq
+msgid "La clave de comprobante debe ser única"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/api_facturae.py:0
+#, python-format
+msgid "La identificación DIMEX del emisor debe de tener 11 o 12 dígitos"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/api_facturae.py:0
+#, python-format
+msgid "La identificación NITE del emisor debe de tener 10 dígitos"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_partner.py:0
+#, python-format
+msgid "La identificación debe tener menos de 20 carateres."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_partner.py:0
+#, python-format
+msgid ""
+"La identificación tipo Cédula física debe de contener 9 dígitos, sin cero al"
+" inicio y sin guiones."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_partner.py:0
+#, python-format
+msgid ""
+"La identificación tipo Cédula jurídica debe contener 10 dígitos, sin cero al"
+" inicio y sin guiones."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_partner.py:0
+#, python-format
+msgid ""
+"La identificación tipo DIMEX debe contener 11 o 12 dígitos, sin ceros al "
+"inicio y sin guiones."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_partner.py:0
+#, python-format
+msgid ""
+"La identificación tipo NITE debe contener 10 dígitos, sin ceros al inicio y "
+"sin guiones."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/api_facturae.py:0
+#, python-format
+msgid "La numeración debe de tener 10 dígitos"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__ultima_respuesta_exo
+msgid "Last API EXONET Response"
+msgstr "Última respuesta API EXONET"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__ultima_respuesta_exo
+msgid "Last API EXONET Response, this allows debugging errors if they exist"
+msgstr ""
+"Última respuesta API EXONET, esto permite errores de depuración si existen"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_invoice_send____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_reversal____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment_term____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_tax____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_aut_ex____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_code_type_product____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_identification_type____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_invoice_qr_fields____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_mail_compose_message____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_category____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_product_template____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_code____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_document____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_resolution____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions____last_update
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_uom_uom____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_aut_ex__write_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_code_type_product__write_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__write_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_identification_type__write_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_invoice_qr_fields__write_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods__write_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_code__write_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_document__write_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_resolution__write_uid
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_aut_ex__write_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_code_type_product__write_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__write_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_identification_type__write_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_invoice_qr_fields__write_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods__write_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_code__write_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_document__write_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_resolution__write_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__date_notification
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__date_notification
+msgid "Last notification date"
+msgstr "Última fecha de notificación"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_account_journal_inherit_form
+msgid "Load invoice lines?"
+msgstr "¿Cargar líneas de factura?"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__tipo_documento__cce
+msgid "MR Aceptación"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__tipo_documento__cpce
+msgid "MR Aceptación Parcial"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__tipo_documento__rce
+msgid "MR Rechazo"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjunto principal"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de entrega de mensaje"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: factura_electronica_cr
+#: model:uom.uom,name:factura_electronica_cr.product_uom_mcuadrado
+msgid "Metro Cuadrado"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:uom.uom,name:factura_electronica_cr.product_uom_mcubico
+msgid "Metro Cubico"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:mail.template,subject:factura_electronica_cr.email_template_edi_expiration_notice
+msgid "NOTIFICACIÓN IMPORTANTE!!"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line__categ_name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_aut_ex__name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_code_type_product__name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_identification_type__name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods__name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_code__name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_reference_document__name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_resolution__name
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_send_invoice__na
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_tributacion__na
+msgid "No Aplica"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_send_invoice__ne
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_tributacion__ne
+msgid "No Encontrado"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_journal.py:0
+#, python-format
+msgid "No attachment was provided"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/api_facturae.py:0
+#, python-format
+msgid "No se ha proporcionado un ID válido para el MR."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__legal_name
+msgid "Nombre Legal"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__tipo_documento__nc
+msgid "Nota de Crédito"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__tipo_documento__nd
+msgid "Nota de Débito"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_identification_type__notes
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods__notes
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__notes
+msgid "Notes"
+msgstr "Notas"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__error_count
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__error_count
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__error_count
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes sin leer"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_partner.py:0
+#, python-format
+msgid "Número de teléfono inválido"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__not_loaded_invoice_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__not_loaded_invoice_date
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__not_loaded_invoice_date
+msgid "Original Invoice Date not loaded"
+msgstr "Fecha de la factura original no cargada"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__not_loaded_invoice
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__not_loaded_invoice
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__not_loaded_invoice
+msgid "Original Invoice Number not loaded"
+msgstr "Número de factura original no cargado"
+
+#. module: factura_electronica_cr
+#: model:uom.uom,name:factura_electronica_cr.product_uom_os
+msgid "Otro Tipo de Servicio"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:product.template,name:factura_electronica_cr.product_otros_cargos
+msgid "Otros Cargos"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_tax__tax_root
+msgid "Parent Tax"
+msgstr "Impuesto Padre"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "Partner"
+msgstr "Socio de Negocio"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__partner_vat
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__partner_vat
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__partner_vat
+msgid "Partner Tax ID"
+msgstr "Identificación de Socio de Negocio"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "Partner is not assigne to this invoice"
+msgstr "El socio de negocio no está asignado a esta factura"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__payment_methods_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__payment_methods_id
+msgid "Payment Method"
+msgstr "Método de pago"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_account_payment_term
+msgid "Payment Terms"
+msgstr "Plazos de pago"
+
+#. module: factura_electronica_cr
+#: model:ir.actions.act_window,name:factura_electronica_cr.action_payment_methods
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__payment_methods_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__payment_methods_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__payment_methods_id
+#: model:ir.ui.menu,name:factura_electronica_cr.menu_payment_methods
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_payment_methods_tree
+msgid "Payment methods"
+msgstr "Métodos de pagos"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_tax__percentage_exoneration
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_partner__percentage_exoneration
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_users__percentage_exoneration
+msgid "Percentage of VAT Exoneration"
+msgstr "Porcentaje de exoneración del IVA"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__frm_pin
+msgid "Pin"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_company.py:0
+#, python-format
+msgid "Please Add Invoice Field's"
+msgstr "Por favor agregue el campo de la factura"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_send_invoice__procesando
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_tributacion__procesando
+msgid "Procesando"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__res_company__frm_ws_ambiente__api-prod
+msgid "Producción"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid "Product Catalog"
+msgstr "Catálogo de producto"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_uom_uom
+msgid "Product Unit of Measure"
+msgstr "Unidad de medida del producto"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__res_company__frm_ws_ambiente__api-stag
+msgid "Pruebas"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__qr_image
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__qr_image
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__qr_image
+msgid "QR Code"
+msgstr "Código QR"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_invoice_partner__3
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_send_invoice__rechazado
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_tributacion__rechazado
+msgid "Rechazado"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_tributacion__recibido
+msgid "Recibido"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_reversal__reference_code_id
+msgid "Reference Code"
+msgstr "Código de Referencia"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_reversal__reference_document_id
+msgid "Reference Document"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__reference_document_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__reference_document_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__reference_document_id
+msgid "Reference Document Type"
+msgstr "Tipo de Documento de Referencia"
+
+#. module: factura_electronica_cr
+#: model:ir.actions.act_window,name:factura_electronica_cr.action_reference_code
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__reference_code_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__reference_code_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__reference_code_id
+#: model:ir.ui.menu,name:factura_electronica_cr.menu_reference_code
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_reference_code_tree
+msgid "Reference code"
+msgstr "Código de Referencia"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__invoice_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__invoice_id
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__invoice_id
+msgid "Reference document"
+msgstr "Documento de Referencia"
+
+#. module: factura_electronica_cr
+#: model:ir.actions.act_window,name:factura_electronica_cr.action_reference_document
+#: model:ir.ui.menu,name:factura_electronica_cr.menu_reference_document
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_reference_document_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_reference_document_tree
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_resolution_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_resolution_tree
+msgid "Reference documents"
+msgstr "Documentos de Referencia"
+
+#. module: factura_electronica_cr
+#: model:uom.category,name:factura_electronica_cr.product_uom_categ_rent
+msgid "Rent"
+msgstr "Renta"
+
+#. module: factura_electronica_cr
+#: model:ir.actions.act_window,name:factura_electronica_cr.action_resolution
+msgid "Resoluciones"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.ui.menu,name:factura_electronica_cr.menu_resolution
+msgid "Resolutions"
+msgstr "Resoluciones"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "Response XML from Hacienda has not been received"
+msgstr "No se ha recibido el XML de respuesta de Hacienda"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__state_invoice_partner
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__state_invoice_partner
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__state_invoice_partner
+msgid "Respuesta del Cliente"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:account.tax.group,name:factura_electronica_cr.tax_group_SC
+msgid "SC"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de entrega de SMS"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment_term__sale_conditions_id
+msgid "Sale Conditions"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_economic_activity__sale_type
+msgid "Sale Type"
+msgstr "Tpo de Venta"
+
+#. module: factura_electronica_cr
+#: model:ir.actions.act_window,name:factura_electronica_cr.action_sale_conditions
+#: model:ir.ui.menu,name:factura_electronica_cr.menu_sale_conditions
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_sale_conditions_form
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_sale_conditions_tree
+msgid "Sale terms"
+msgstr "Términos de Venta"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_economic_activity_filter
+msgid "Search Activity"
+msgstr "Buscar Actividad"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__CCE_sequence_id
+msgid "Secuencia Aceptación"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__CPCE_sequence_id
+msgid "Secuencia Parcial"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__RCE_sequence_id
+msgid "Secuencia Rechazo"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__FEC_sequence_id
+msgid "Secuencia de Facturas Electrónicas de Compra"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__CCE_sequence_id
+msgid ""
+"Secuencia de confirmacion de aceptación de comprobante electrónico. Dejar en"
+" blanco y el sistema automaticamente se lo creará."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__CPCE_sequence_id
+msgid ""
+"Secuencia de confirmación de aceptación parcial de comprobante electrónico. "
+"Dejar en blanco y el sistema automáticamente se lo creará."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__RCE_sequence_id
+msgid ""
+"Secuencia de confirmación de rechazo de comprobante electrónico. Dejar en "
+"blanco y el sistema automáticamente se lo creará."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/api_facturae.py:0
+#, python-format
+msgid ""
+"Seleccione el tipo de identificación del emisor en el pérfil de la compañía"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid "Sell and purchase products in different units of measure"
+msgstr "Vender y comprar productos en diferentes unidades de medida"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid "Sell products by multiple of unit # per package"
+msgstr "Vender productos por múltiplo de unidad # por paquete"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid "Send Document"
+msgstr "Enviar Documento"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid "Send FEC"
+msgstr "Enviar FEC"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "Send Invoice"
+msgstr "Enviar Documento"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid "Send Receiver Message"
+msgstr "Enviar Mensaje al Receptor"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid "Send a product-specific email once the invoice is paid"
+msgstr ""
+"Envíe un correo electrónico específico del producto una vez que se pague la "
+"factura"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid ""
+"Sending an email is useful if you need to share specific information or "
+"content about a product (instructions, rules, links, media, etc.). Create "
+"and set the email template from the product detail form (in Sales tab)."
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_invoice_qr_fields__sequence
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_payment_methods__sequence
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_sale_conditions__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__FEE_sequence_id
+msgid "Sequence of Electronic Export Invoices"
+msgstr "Secuencia de facturas de exportación electrónicas"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__economic_activity__sale_type__services
+#: model:uom.category,name:factura_electronica_cr.product_uom_categ_service
+msgid "Services"
+msgstr "Servicios"
+
+#. module: factura_electronica_cr
+#: model:uom.uom,name:factura_electronica_cr.product_uom_spe
+msgid "Servicios Personales"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:uom.uom,name:factura_electronica_cr.product_uom_sp
+msgid "Servicios Profesionales"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:uom.uom,name:factura_electronica_cr.product_uom_st
+msgid "Servicios Técnicos"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_resolution__active
+msgid "Set active or inactive DGT resolutions."
+msgstr "Establecer resoluciones DGT activas o inactivas."
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid "Set product attributes (e.g. color, size) to sell variants"
+msgstr "Establezca los atributos del producto (por ejemplo, color, tamaño) para vender variantes"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_company.py:0
+#, python-format
+msgid "Signature requerido"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__state_email__no_email
+msgid "Sin cuenta de correo"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_tree_inherit
+msgid "State FE"
+msgstr "Estado FE"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__sucursal
+msgid "Sucursal"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__sucursal_MR
+msgid "Sucursal para secuencias de MRs"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line__tariff_head
+msgid "Tariff item for export invoice"
+msgstr "Partida arancelaria para factura de exportación"
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_account_tax
+msgid "Tax"
+msgstr "Impuesto"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_tax__tax_code
+msgid "Tax Code"
+msgstr "Código de Impuesto"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_product_product__tariff_head
+#: model:ir.model.fields,help:factura_electronica_cr.field_product_template__tariff_head
+msgid "Tax rate to apply for exporting invoices"
+msgstr "Tasa de impuesto a aplicar para la exportación de facturas"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_journal__terminal
+msgid "Terminal"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__terminal_MR
+msgid "Terminal para secuencias de MRs"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_company_form_inherit
+msgid "Test get token"
+msgstr "Probar a obtener token"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_bank_statement_line__partner_vat
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_move__partner_vat
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_payment__partner_vat
+msgid "The Parnter Tax Identification Number."
+msgstr "El número de identificación fiscal del socio de negocio."
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "The Total amount of the Invoice for the Message Receiver is invalid"
+msgstr "El monto total de la factura para el receptor del mensaje no es válido"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_journal__expense_analytic_account_id
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_config_settings__expense_analytic_account_id
+msgid "The analytic account used when loading Costa Rican digital invoice"
+msgstr "La cuenta analítica utilizada al cargar la factura digital costarricense"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_journal__expense_product_id
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_config_settings__expense_product_id
+msgid "The default product used when loading Costa Rican digital invoice"
+msgstr "El producto predeterminado utilizado al cargar la factura digital costarricense"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid ""
+"The document has not yet been issued, it will be sent automatically in 5 "
+"minutes, if you need to send it manually press"
+msgstr ""
+"El documento aún no ha sido emitido, se enviará automáticamente en 5 "
+"minutos, si necesita enviarlo manualmente presione"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_move_form_inherit
+msgid ""
+"The document was issued successfully, however we still do not have the "
+"answer, it will be consulted in 10 minutes, if you wish to consult it "
+"manually press"
+msgstr ""
+"El documento fue emitido exitosamente, sin embargo aún no tenemos la "
+"respuesta, será consultado en 10 minutos, si desea consultarlo manualmente "
+"presione"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_journal__expense_account_id
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_config_settings__expense_account_id
+msgid "The expense account used when loading Costa Rican digital invoice"
+msgstr "La cuenta de gastos utilizada al cargar factura digital costarricense"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid ""
+"The partner %s has no defined economic activity, please validate the "
+"information in the business partner before placing it!"
+msgstr ""
+"El socio %s no tiene una actividad económica definida, por favor valide la "
+"información en el socio de negocios antes de seleccionarlo! "
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid ""
+"There is no \"Non tax deductible\" tax with the tax percentage of this "
+"product"
+msgstr ""
+"No hay ningún impuesto \"no deducible de impuestos\" con el porcentaje de "
+"impuestos de este producto"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line__third_party_id
+msgid "Third - other charges"
+msgstr "Tercero - otros cargos"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_journal.py:0
+#, python-format
+msgid "This XML file is not XML-compliant. Error: %s"
+msgstr "Este archivo XML no es compatible con XML. Error: %s"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_journal.py:0
+#, python-format
+msgid "This is a TICKET only invoices are valid for taxes"
+msgstr "Este es un TIQUETE solo las facturas son validas para impuestos"
+
+#. module: factura_electronica_cr
+#: model:product.template,name:factura_electronica_cr.product_bomberos
+msgid "Timbre de Benemérito Cuerpo de Bomberos de Costa Rica"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:product.template,name:factura_electronica_cr.product_profesionales
+msgid "Timbre de Colegios Profesionales"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:product.template,name:factura_electronica_cr.product_cruz_roja
+msgid "Timbre de la Cruz Roja"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields.selection,name:factura_electronica_cr.selection__account_move__tipo_documento__te
+msgid "Tiquete Electrónico"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/res_company.py:0
+#, python-format
+msgid "Token Correcto"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__amount_total_electronic_invoice
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__amount_total_electronic_invoice
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__amount_total_electronic_invoice
+msgid "Total FE"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__amount_tax_electronic_invoice
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__amount_tax_electronic_invoice
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__amount_tax_electronic_invoice
+msgid "Total FE taxes"
+msgstr "Total Impuestos FE"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move_line__total_tax
+msgid "Total Tax"
+msgstr "Total Impuestos"
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.view_company_form_inherit
+msgid "URL Base"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__url_base_exo
+msgid "URL Base ENDPOINT EXONET"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__url_base_exo
+msgid "URL Base EXONET"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:product.template,uom_name:factura_electronica_cr.product_bomberos
+#: model:product.template,uom_name:factura_electronica_cr.product_cruz_roja
+#: model:product.template,uom_name:factura_electronica_cr.product_exportacion
+#: model:product.template,uom_name:factura_electronica_cr.product_iva_devuelto
+#: model:product.template,uom_name:factura_electronica_cr.product_otros_cargos
+#: model:product.template,uom_name:factura_electronica_cr.product_parafiscal
+#: model:product.template,uom_name:factura_electronica_cr.product_profesionales
+#: model:product.template,uom_name:factura_electronica_cr.product_servicio
+#: model:product.template,uom_name:factura_electronica_cr.product_tercero
+msgid "Unidad"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model_terms:ir.ui.view,arch_db:factura_electronica_cr.res_config_settings_view_form
+msgid "Units of Measure"
+msgstr "Unidad de Medida"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_unread
+msgid "Unread Messages"
+msgstr "Mensajes sin leer"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de mensajes sin leer"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__send_user_ids
+msgid "Users"
+msgstr "Usuarios"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_tax__iva_tax_code
+msgid "VAT Rate Code"
+msgstr "Código de Tarifa IVA"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_tax__iva_tax_desc
+msgid "VAT Tax Rate"
+msgstr "Tarifa IVA"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "Vendor"
+msgstr "Proveedor"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__xml_supplier_approval
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__xml_supplier_approval
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__xml_supplier_approval
+msgid "Vendor XML"
+msgstr "XML Proveedor"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__fname_xml_supplier_approval
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__fname_xml_supplier_approval
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__fname_xml_supplier_approval
+msgid "Vendor XML voucher file name"
+msgstr "Nombre de XML Proveedor"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__tipo_documento
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__tipo_documento
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__tipo_documento
+msgid "Voucher Type"
+msgstr "Tipo de Comprobante"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid ""
+"Warning!\n"
+"You must first select the response type for the uploaded file."
+msgstr ""
+"¡Advertencia!\n"
+"Primero debe seleccionar el tipo de respuesta para el archivo cargado."
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid ""
+"Warning!.\n"
+" The supplier invoice has already been confirmed"
+msgstr ""
+"¡Advertencia!.\n"
+"La factura del proveedor ya ha sido confirmada"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid ""
+"Warning!.\n"
+" Total amount does not match XML amount"
+msgstr ""
+"¡Advertencia!.\n"
+"La cantidad total no coincide con la cantidad XML"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid ""
+"Warning!.\n"
+" XML file not loaded"
+msgstr ""
+"¡Advertencia!.\n"
+"Archivo XML no cargado"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid "Warning!.\n Please configure the purchase journal, terminal and branch"
+msgstr "¡Advertencia!.\n Configure el diario de compras, el terminal y la sucursal"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_res_company__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del Sitio Web"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_res_company__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de Comunicación del Sitio Web"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__fname_xml_respuesta_tributacion
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__fname_xml_respuesta_tributacion
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__fname_xml_respuesta_tributacion
+msgid "XML File Name Tributación Response"
+msgstr "Respuesta de tributación de nombre de archivo XML"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__xml_respuesta_tributacion
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__xml_respuesta_tributacion
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__xml_respuesta_tributacion
+msgid "XML Tributación Response"
+msgstr "XML Respuesta Tributación"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_bank_statement_line__xml_comprobante
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_move__xml_comprobante
+#: model:ir.model.fields,field_description:factura_electronica_cr.field_account_payment__xml_comprobante
+msgid "XML voucher"
+msgstr "Comprobante XML"
+
+#. module: factura_electronica_cr
+#: code:addons/factura_electronica_cr/models/account_move.py:0
+#, python-format
+msgid ""
+"You must select the aceptance state: Accepted, Parcial Accepted or Rejected"
+msgstr ""
+"Debe seleccionar el estado de aceptación: Aceptado, Aceptado parcialmente o "
+"Rechazado"
+
+#. module: factura_electronica_cr
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_bank_statement_line__company_vat
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_move__company_vat
+#: model:ir.model.fields,help:factura_electronica_cr.field_account_payment__company_vat
+msgid "Your Company Tax Identification Number."
+msgstr "Número de identificación fiscal de su empresa."
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_aut_ex
+msgid "aut.ex"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_code_type_product
+msgid "code.type.product"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_identification_type
+msgid "identification.type"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_invoice_qr_fields
+msgid "invoice.qr.fields"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_payment_methods
+msgid "payment.methods"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_reference_code
+msgid "reference.code"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_reference_document
+msgid "reference.document"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_resolution
+msgid "resolution"
+msgstr ""
+
+#. module: factura_electronica_cr
+#: model:ir.model,name:factura_electronica_cr.model_sale_conditions
+msgid "sale.conditions"
+msgstr ""

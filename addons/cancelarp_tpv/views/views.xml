@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="cancelarp_tpv.list">
+      <field name="name">cancelarp_tpv list</field>
+      <field name="model">cancelarp_tpv.cancelarp_tpv</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </list>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="cancelarp_tpv.action_window">
+      <field name="name">cancelarp_tpv window</field>
+      <field name="res_model">cancelarp_tpv.cancelarp_tpv</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="cancelarp_tpv.action_server">
+      <field name="name">cancelarp_tpv server</field>
+      <field name="model_id" ref="model_cancelarp_tpv_cancelarp_tpv"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="cancelarp_tpv" id="cancelarp_tpv.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="cancelarp_tpv.menu_1" parent="cancelarp_tpv.menu_root"/>
+    <menuitem name="Menu 2" id="cancelarp_tpv.menu_2" parent="cancelarp_tpv.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="cancelarp_tpv.menu_1_list" parent="cancelarp_tpv.menu_1"
+              action="cancelarp_tpv.action_window"/>
+    <menuitem name="Server to list" id="cancelarp_tpv" parent="cancelarp_tpv.menu_2"
+              action="cancelarp_tpv.action_server"/>
+-->
+  </data>
+</odoo>
